@@ -24,18 +24,19 @@ const { products } = productsData;
       <div class="hidden md:flex items-center space-x-8">
         {navigation.main.map((item) => (
           item.name === 'Products' ? (
-            <div class="relative group">
+            <div class="relative">
               <button 
-                class="products-dropdown-trigger flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+                id="products-dropdown-trigger"
+                class="flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
               >
                 {item.name}
-                <svg class="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg id="products-dropdown-icon" class="ml-1 h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </button>
               
               <!-- Dropdown Menu -->
-              <div class="products-dropdown absolute top-full left-0 mt-2 w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
+              <div id="products-dropdown" class="absolute top-full left-0 mt-2 w-80 transition-all duration-200 transform translate-y-1" style="opacity: 0; visibility: hidden; pointer-events: none;">
                 <div class="bg-black/90 backdrop-blur-lg rounded-lg border border-white/20 shadow-xl p-4">
                   <div class="grid gap-3">
                     {products.map((product) => (
@@ -166,8 +167,8 @@ const { products } = productsData;
 </header>
 
 <script>
-  // Mobile menu toggle
   document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
     const button = document.querySelector('.mobile-menu-button');
     const menu = document.querySelector('.mobile-menu');
     
@@ -188,6 +189,46 @@ const { products } = productsData;
         mobileProductsIcon?.classList.toggle('rotate-180');
       });
     }
+
+    // Desktop products dropdown toggle
+    const productsDropdownTrigger = document.getElementById('products-dropdown-trigger');
+    const productsDropdown = document.getElementById('products-dropdown');
+    const productsDropdownIcon = document.getElementById('products-dropdown-icon');
+
+    if (productsDropdownTrigger && productsDropdown) {
+      let isOpen = false;
+      productsDropdownTrigger.addEventListener('click', function(event) {
+        event.stopPropagation();
+        isOpen = !isOpen;
+        if (isOpen) {
+          productsDropdown.style.opacity = '1';
+          productsDropdown.style.visibility = 'visible';
+          productsDropdown.style.transform = 'translateY(0)';
+          productsDropdown.style.pointerEvents = 'auto';
+        } else {
+          productsDropdown.style.opacity = '0';
+          productsDropdown.style.visibility = 'hidden';
+          productsDropdown.style.transform = 'translateY(0.25rem)';
+          productsDropdown.style.pointerEvents = 'none';
+        }
+        if (productsDropdownIcon) {
+          productsDropdownIcon.classList.toggle('rotate-180', isOpen);
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        if (isOpen && productsDropdown && !productsDropdown.contains(event.target) && productsDropdownTrigger && !productsDropdownTrigger.contains(event.target)) {
+          isOpen = false;
+          productsDropdown.style.opacity = '0';
+          productsDropdown.style.visibility = 'hidden';
+          productsDropdown.style.transform = 'translateY(0.25rem)';
+          productsDropdown.style.pointerEvents = 'none';
+          if (productsDropdownIcon) {
+            productsDropdownIcon.classList.remove('rotate-180');
+          }
+        }
+      });
+    }
   });
 </script>
 
@@ -195,20 +236,5 @@ const { products } = productsData;
   /* Enhanced dropdown styles */
   .products-dropdown {
     z-index: 9999;
-  }
-  
-  /* Smooth hover transitions for desktop dropdown */
-  @media (min-width: 768px) {
-    .group:hover .products-dropdown {
-      pointer-events: auto;
-    }
-    
-    .products-dropdown {
-      pointer-events: none;
-    }
-    
-    .group:hover .products-dropdown {
-      pointer-events: auto;
-    }
   }
 </style>
