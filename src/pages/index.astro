@@ -1,18 +1,22 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import HeroSection from '../components/HeroSection.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+import BenefitsSection from '../components/BenefitsSection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>DnsHistory-test</title>
-	</head>
-	<body>
-		<main>
-			<h1>Welcome to D<em>nsHistor</em>y-test by Ali hassan&nbsp;</h1>
-			<p>Your Astro site is running!</p>
-		</main>
-	</body>
-</html>
+<Layout title="Zoros.io - Developer-First Cybersecurity APIs">
+  <Navbar />
+  <main>
+    <HeroSection />
+    <ProductGrid />
+    <BenefitsSection />
+    <TestimonialsSection />
+    <CallToAction />
+  </main>
+  <Footer />
+</Layout>
