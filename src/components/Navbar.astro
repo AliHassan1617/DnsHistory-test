@@ -1,0 +1,214 @@
+---
+import Button from './ui/Button.astro';
+import siteData from '../data/site.json';
+import productsData from '../data/products.json';
+
+const { navigation } = siteData;
+const { products } = productsData;
+---
+
+<header class="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-sm border-b border-white/10">
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a href="/" class="flex items-center space-x-2">
+          <div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <span class="text-primary-foreground font-bold text-lg">Z</span>
+          </div>
+          <span class="text-xl font-bold text-foreground">Zoros.io</span>
+        </a>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        {navigation.main.map((item) => (
+          item.name === 'Products' ? (
+            <div class="relative group">
+              <button 
+                class="products-dropdown-trigger flex items-center text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+              >
+                {item.name}
+                <svg class="ml-1 h-4 w-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              
+              <!-- Dropdown Menu -->
+              <div class="products-dropdown absolute top-full left-0 mt-2 w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-1 group-hover:translate-y-0">
+                <div class="bg-black/90 backdrop-blur-lg rounded-lg border border-white/20 shadow-xl p-4">
+                  <div class="grid gap-3">
+                    {products.map((product) => (
+                      <a
+                        href={product.href}
+                        class="flex items-start p-3 rounded-lg hover:bg-white/10 transition-colors duration-200 group/item"
+                      >
+                        <div class="flex-shrink-0 mr-3 mt-1">
+                          {product.icon === 'globe' && (
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9v-9m0-9v9m0 9c-5 0-9-4-9-9s4-9 9-9m0 18v-9"></path>
+                            </svg>
+                          )}
+                          {product.icon === 'shield' && (
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.031 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                          )}
+                          {product.icon === 'search' && (
+                            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                          )}
+                        </div>
+                        <div class="flex-1">
+                          <h4 class="text-white font-medium text-sm group-hover/item:text-primary transition-colors">
+                            {product.name}
+                          </h4>
+                          <p class="text-white/70 text-xs mt-1 leading-relaxed">
+                            {product.shortDescription}
+                          </p>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                  <div class="border-t border-white/10 mt-4 pt-4">
+                    <a
+                      href="/products"
+                      class="flex items-center justify-center px-4 py-2 text-sm font-medium text-primary hover:text-primary-foreground hover:bg-primary rounded-lg transition-colors duration-200"
+                    >
+                      View All Products
+                      <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a 
+              href={item.href} 
+              class="text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+            >
+              {item.name}
+            </a>
+          )
+        ))}
+      </div>
+
+      <!-- CTA Button -->
+      <div class="hidden md:flex items-center">
+        <Button variant="glass" href={navigation.cta.href}>
+          <p>Signup / Login</p>
+        </Button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="md:hidden">
+        <button 
+          type="button" 
+          class="mobile-menu-button text-muted-foreground hover:text-foreground focus:outline-none focus:text-foreground transition-colors duration-200"
+          aria-label="Toggle menu"
+        >
+          <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu hidden md:hidden">
+      <div class="px-2 pt-2 pb-3 space-y-1 bg-black/90 backdrop-blur-lg rounded-lg mt-2 border border-white/20">
+        {navigation.main.map((item) => (
+          item.name === 'Products' ? (
+            <div class="mobile-products-section">
+              <button class="mobile-products-toggle w-full text-left px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium flex items-center justify-between">
+                {item.name}
+                <svg class="h-4 w-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </button>
+              <div class="mobile-products-dropdown hidden pl-4 space-y-2 mt-2">
+                {products.map((product) => (
+                  <a
+                    href={product.href}
+                    class="block px-3 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
+                  >
+                    {product.name}
+                  </a>
+                ))}
+                <a
+                  href="/products"
+                  class="block px-3 py-2 text-sm text-primary hover:text-primary-foreground transition-colors duration-200"
+                >
+                  View All Products →
+                </a>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={item.href}
+              class="block px-3 py-2 text-muted-foreground hover:text-foreground transition-colors duration-200 font-medium"
+            >
+              {item.name}
+            </a>
+          )
+        ))}
+        <div class="pt-2">
+          <Button variant="glass" href={navigation.cta.href} class="w-full">
+            <p>Signup / Login</p>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu toggle
+  document.addEventListener('DOMContentLoaded', function() {
+    const button = document.querySelector('.mobile-menu-button');
+    const menu = document.querySelector('.mobile-menu');
+    
+    if (button && menu) {
+      button.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+      });
+    }
+
+    // Mobile products dropdown toggle
+    const mobileProductsToggle = document.querySelector('.mobile-products-toggle');
+    const mobileProductsDropdown = document.querySelector('.mobile-products-dropdown');
+    const mobileProductsIcon = mobileProductsToggle?.querySelector('svg');
+    
+    if (mobileProductsToggle && mobileProductsDropdown) {
+      mobileProductsToggle.addEventListener('click', function() {
+        mobileProductsDropdown.classList.toggle('hidden');
+        mobileProductsIcon?.classList.toggle('rotate-180');
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Enhanced dropdown styles */
+  .products-dropdown {
+    z-index: 9999;
+  }
+  
+  /* Smooth hover transitions for desktop dropdown */
+  @media (min-width: 768px) {
+    .group:hover .products-dropdown {
+      pointer-events: auto;
+    }
+    
+    .products-dropdown {
+      pointer-events: none;
+    }
+    
+    .group:hover .products-dropdown {
+      pointer-events: auto;
+    }
+  }
+</style>

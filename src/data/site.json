@@ -1,0 +1,171 @@
+{
+  "site": {
+    "name": "Zoros.io",
+    "description": "Developer-first tools and APIs for cybersecurity, compliance, and data insights",
+    "url": "https://zoros.io",
+    "logo": "/logo.svg"
+  },
+  "hero": {
+    "title": "Developer-First Cybersecurity APIs",
+    "subtitle": "Build secure applications with comprehensive threat intelligence and compliance data",
+    "description": "Access real-time and historical data through our enterprise-grade APIs. Built for developers, trusted by security teams.",
+    "primaryCta": "Get Started Free",
+    "secondaryCta": "View Documentation"
+  },
+  "benefits": [
+    {
+      "title": "Developer Experience",
+      "description": "Clean APIs, comprehensive docs, and SDKs in every language",
+      "icon": "code"
+    },
+    {
+      "title": "Enterprise Scale",
+      "description": "99.9% uptime SLA with global infrastructure and redundancy",
+      "icon": "zap"
+    },
+    {
+      "title": "Real-time Data",
+      "description": "Fresh data with sub-second latency and instant updates",
+      "icon": "activity"
+    },
+    {
+      "title": "Compliance Ready",
+      "description": "SOC2, GDPR, and industry compliance built into every API",
+      "icon": "shield"
+    }
+  ],
+  "testimonials": [
+    {
+      "content": "Zoros.io has transformed how we handle threat intelligence. The API quality and data accuracy are unmatched.",
+      "author": "Sarah Chen",
+      "title": "Security Engineer",
+      "company": "TechCorp"
+    },
+    {
+      "content": "The developer experience is fantastic. We went from prototype to production in days, not weeks.",
+      "author": "Mike Rodriguez",
+      "title": "Senior Developer",
+      "company": "SecureApp"
+    },
+    {
+      "content": "Finally, cybersecurity data that doesn't require a PhD to integrate. Clean APIs and excellent documentation.",
+      "author": "Alex Thompson",
+      "title": "CTO",
+      "company": "DataGuard"
+    }
+  ],
+  "logos": [
+    {
+      "name": "TechCorp",
+      "src": "/logos/techcorp.svg"
+    },
+    {
+      "name": "SecureApp",
+      "src": "/logos/secureapp.svg"
+    },
+    {
+      "name": "DataGuard",
+      "src": "/logos/dataguard.svg"
+    },
+    {
+      "name": "CyberShield",
+      "src": "/logos/cybershield.svg"
+    }
+  ],
+  "navigation": {
+    "main": [
+      {
+        "name": "Products",
+        "href": "/products"
+      },
+      {
+        "name": "Documentation",
+        "href": "/docs"
+      },
+      {
+        "name": "Pricing",
+        "href": "/pricing"
+      },
+      {
+        "name": "About",
+        "href": "/about"
+      }
+    ],
+    "cta": {
+      "name": "Get Started",
+      "href": "/signup"
+    }
+  },
+  "footer": {
+    "sections": [
+      {
+        "title": "Products",
+        "links": [
+          {
+            "name": "DNS History",
+            "href": "/products/dns-history"
+          },
+          {
+            "name": "SSL Certificates",
+            "href": "/products/ssl-certificates"
+          },
+          {
+            "name": "WHOIS Data",
+            "href": "/products/whois-data"
+          }
+        ]
+      },
+      {
+        "title": "Developers",
+        "links": [
+          {
+            "name": "API Documentation",
+            "href": "/docs"
+          },
+          {
+            "name": "SDKs",
+            "href": "/docs/sdks"
+          },
+          {
+            "name": "Status",
+            "href": "/status"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "name": "About",
+            "href": "/about"
+          },
+          {
+            "name": "Blog",
+            "href": "/blog"
+          },
+          {
+            "name": "Careers",
+            "href": "/careers"
+          }
+        ]
+      },
+      {
+        "title": "Support",
+        "links": [
+          {
+            "name": "Help Center",
+            "href": "/help"
+          },
+          {
+            "name": "Contact",
+            "href": "/contact"
+          },
+          {
+            "name": "Privacy",
+            "href": "/privacy"
+          }
+        ]
+      }
+    ]
+  }
+}
