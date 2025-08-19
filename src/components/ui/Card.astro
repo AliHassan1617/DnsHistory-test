@@ -1,0 +1,15 @@
+---
+export interface Props {
+  class?: string;
+  glass?: boolean;
+}
+
+const { class: className, glass = false, ...props } = Astro.props;
+const baseClasses = "rounded-lg border bg-card text-card-foreground shadow-sm";
+const glassClasses = "bg-white/5 border-white/10 backdrop-blur-md";
+const classes = glass ? `${baseClasses} ${glassClasses} ${className || ''}` : `${baseClasses} ${className || ''}`;
+---
+
+<div class={classes} {...props}>
+  <slot />
+</div>
