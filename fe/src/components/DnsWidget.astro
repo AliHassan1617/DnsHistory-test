@@ -1,0 +1,65 @@
+---
+import CardTitle from './ui/CardTitle.astro';
+import Button from './ui/Button.astro';
+import Input from './ui/Input.astro';
+---
+<div class="glass rounded-lg p-6 border border-white/20 w-full">
+  <div class="flex justify-between items-center mb-4 gap-4">
+    <CardTitle>DNS History</CardTitle>
+    <Input id="domain-input" placeholder="Enter domain (e.g., example.com)" value="google.com" class="flex-grow max-w-xs" />
+    <Button id="search-button" variant="glass">Search</Button>
+  </div>
+  <pre id="json-output" class="text-sm text-white/90 overflow-x-auto bg-black/20 p-4 rounded-lg font-mono"><code class="h-full block">{JSON.stringify({
+  "domain": "example.com",
+  "records": [
+    {
+      "type": "A",
+      "value": "93.184.216.34",
+      "first_seen": "2022-01-01",
+      "last_seen": "2023-12-31"
+    },
+    {
+      "type": "MX",
+      "value": "mail.example.com",
+      "first_seen": "2022-01-01",
+      "last_seen": "2023-12-31"
+    }
+  ]
+}, null, 2)}</code></pre>
+<script>
+  const button = document.querySelector('#search-button');
+  const input = document.querySelector('#domain-input');
+  const code = document.querySelector('#json-output code');
+
+  button.addEventListener('click', async () => {
+    const domain = input.value;
+    if (!domain) return;
+
+    code.textContent = 'Loading...';
+
+    setTimeout(() => {
+      const mockApiResponse = {
+        domain,
+        records: [
+          {
+            type: "A",
+            value: "192.168.1.1",
+            first_seen: "2023-01-01",
+            last_seen: "2024-01-01"
+          },
+          {
+            type: "MX",
+            value: "mail.example.com",
+            first_seen: "2023-01-01",
+            last_seen: "2024-01-01"
+          }
+        ]
+      };
+
+      code.textContent = JSON.stringify(mockApiResponse, null, 2);
+    }, 2000);
+  });
+
+  // Trigger search on page load
+  button.click();
+</script>

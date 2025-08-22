@@ -1,0 +1,68 @@
+---
+import Card from './ui/Card.astro';
+import CardContent from './ui/CardContent.astro';
+import siteData from '../data/site.json';
+
+const { testimonials, logos } = siteData;
+---
+
+<section class="py-20 bg-card/30">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+        Trusted by Industry Leaders
+      </h2>
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+        See what our customers are saying about our cybersecurity APIs
+      </p>
+    </div>
+    
+    <!-- Testimonials Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+      {testimonials.map((testimonial) => (
+        <Card glass class="border-white/20">
+          <CardContent class="p-8">
+            <!-- Quote Icon -->
+            <div class="text-primary mb-4">
+              <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 32 32">
+                <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14h-4c0-2.2 1.8-4 4-4V8zm16 0c-3.3 0-6 2.7-6 6v10h10V14h-4c0-2.2 1.8-4 4-4V8z"/>
+              </svg>
+            </div>
+            
+            <!-- Quote -->
+            <blockquote class="text-white/90 text-lg leading-relaxed mb-6">
+              "{testimonial.content}"
+            </blockquote>
+            
+            <!-- Author -->
+            <div class="flex items-center">
+              <div class="w-12 h-12 bg-gradient-to-br from-primary to-purple-600 rounded-full flex items-center justify-center text-white font-semibold mr-4">
+                {testimonial.author.charAt(0)}
+              </div>
+              <div>
+                <div class="font-semibold text-white">{testimonial.author}</div>
+                <div class="text-white/70 text-sm">{testimonial.title}</div>
+                <div class="text-white/50 text-sm">{testimonial.company}</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+    
+    <!-- Customer Logos -->
+    <div class="border-t border-white/10 pt-16">
+      <div class="text-center mb-8">
+        <p class="text-muted-foreground font-medium">Trusted by companies worldwide</p>
+      </div>
+      <div class="flex flex-wrap justify-center items-center gap-8 opacity-60">
+        {logos.map((logo) => (
+          <div class="h-12 w-32 bg-white/10 rounded-lg flex items-center justify-center border border-white/10">
+            <span class="text-white/80 font-semibold text-sm">{logo.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

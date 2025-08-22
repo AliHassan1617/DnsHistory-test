@@ -1,0 +1,82 @@
+---
+const faqs = [
+  {
+    question: "What is DNS history?",
+    answer: "DNS history is a record of all the changes that have been made to a domain's DNS records over time. This includes changes to A, AAAA, CNAME, MX, NS, and other types of DNS records."
+  },
+  {
+    question: "Why is DNS history important?",
+    answer: "DNS history can be used for a variety of purposes, including cybersecurity investigations, brand protection, and infrastructure analysis. By understanding how a domain's DNS records have changed over time, you can gain valuable insights into its history and usage."
+  },
+  {
+    question: "How can I access DNS history?",
+    answer: "You can access DNS history using a variety of tools and services, including online DNS history checkers, APIs, and command-line tools. Zoros.io provides a comprehensive DNS history API that allows you to access historical DNS records for any domain."
+  },
+    {
+    question: "What types of DNS records are included in DNS history?",
+    answer: "DNS history typically includes a wide range of DNS record types, including A, AAAA, CNAME, MX, NS, PTR, SOA, and TXT records. This allows you to get a complete picture of a domain's DNS configuration over time."
+  }
+];
+---
+
+<section class="py-20 bg-background">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-xl text-muted-foreground">
+          Here are some of our most frequently asked questions about DNS history.
+        </p>
+      </div>
+      <div class="space-y-4">
+        {faqs.map((faq, index) => (
+          <div class="border border-border rounded-lg" data-accordion-item>
+            <button class="flex items-center justify-between w-full p-6 font-medium text-left text-foreground hover:bg-accent focus:outline-none focus-visible:ring focus-visible:ring-primary focus-visible:ring-opacity-75" data-accordion-trigger>
+              <span>{faq.question}</span>
+              <svg class="w-6 h-6 shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </button>
+            <div class="overflow-hidden transition-[max-height] duration-300 ease-in-out" style="max-height: 0;" data-accordion-content>
+              <div class="p-6 pt-0 text-muted-foreground">
+                <p>{faq.answer}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordionItems = document.querySelectorAll('[data-accordion-item]');
+
+    accordionItems.forEach(item => {
+      const trigger = item.querySelector('[data-accordion-trigger]');
+      const content = item.querySelector('[data-accordion-content]');
+      const arrow = trigger.querySelector('svg');
+
+      trigger.addEventListener('click', () => {
+        const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+
+        // Close all other accordions
+        accordionItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.querySelector('[data-accordion-trigger]').setAttribute('aria-expanded', 'false');
+            otherItem.querySelector('[data-accordion-content]').style.maxHeight = '0';
+            otherItem.querySelector('[data-accordion-trigger] svg').classList.remove('rotate-180');
+          }
+        });
+
+        // Toggle the clicked accordion
+        trigger.setAttribute('aria-expanded', String(!isExpanded));
+        content.style.maxHeight = isExpanded ? '0' : content.scrollHeight + 'px';
+        arrow.classList.toggle('rotate-180');
+      });
+    });
+  });
+</script>

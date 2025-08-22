@@ -1,0 +1,10 @@
+---
+export interface Props {
+  placeholder?: string;
+  value?: string;
+  class?: string;
+}
+
+const { placeholder, value, class: className } = Astro.props;
+---
+<input id="domain-input" type="text" placeholder={placeholder} value={value} class:list={[className, "w-full bg-input border border-input rounded-md p-2 text-base placeholder-white/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:border-input disabled:cursor-not-allowed disabled:opacity-50 transition-colors duration-200 text-foreground h-10 px-3 py-2"]} />

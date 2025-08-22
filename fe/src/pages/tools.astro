@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ProductGrid from '../components/ProductGrid.astro';
+---
+
+<Layout title="Tools - Zoros.io" description="A collection of tools to help you with your cybersecurity needs.">
+  <Navbar />
+  <main>
+    <section class="py-20">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+            Tools
+          </h1>
+          <p class="text-xl sm:text-2xl text-white/80 mb-8 leading-relaxed">
+            A collection of tools to help you with your cybersecurity needs.
+          </p>
+        </div>
+        <ProductGrid filter="tools" />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
